@@ -7,8 +7,6 @@ interface PokemonCardProps {
   pokemonURL: string;
 }
 
-
-
 export const PokemonCard: React.FC<PokemonCardProps> = ({ pokemonURL }) => {
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
 
