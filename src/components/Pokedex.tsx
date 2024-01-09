@@ -39,8 +39,8 @@ export const Pokedex = () => {
 
   useEffect(()=>{
 
-    if(isVisible){
-        const maxPokemons = pokemonsByName.length;
+    const maxPokemons = pokemonsByName.length;
+    if(isVisible && maxPokemons != 0){
         const newLimit = limit + INCREASE_LIMIT;
         newLimit > maxPokemons ? setLimit(maxPokemons) : setLimit(newLimit);
      }
