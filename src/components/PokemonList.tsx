@@ -1,6 +1,6 @@
 import React from "react";
 import { PokemonCard } from "./PokemonCard";
-import { Pokemon } from "../types/types";
+import { Pokemon, PokemonResponse } from "../types/types";
 import { usePokemonContext } from "../hooks/usePokemonContext";
 
 interface PokemonListProps {
@@ -8,9 +8,11 @@ interface PokemonListProps {
 }
 
 export const PokemonList: React.FC<PokemonListProps> = ({ pokemons }) => {
-  const { showPokemonById } = usePokemonContext() ?? {};
+  const { showPokemon } = usePokemonContext() ?? {};
 
-  const handleClick = showPokemonById ?? (() => {});
+  const handleClick = (pokemon: PokemonResponse) => {
+    showPokemon(pokemon);
+  };
 
   return (
     <section className="pt-14 grid grid-cols-[repeat(auto-fit,_minmax(180px,_1fr))] gap-4 gap-y-14">

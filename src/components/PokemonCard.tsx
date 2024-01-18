@@ -5,7 +5,7 @@ import { colorByType } from "../contants/colors";
 
 interface PokemonCardProps {
   pokemonURL: string;
-  onClick: React.MouseEventHandler<HTMLElement>;
+  onClick: (pokemon: PokemonResponse) => void;
 }
 
 export const PokemonCard: React.FC<PokemonCardProps> = ({
@@ -15,15 +15,21 @@ export const PokemonCard: React.FC<PokemonCardProps> = ({
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
 
   useEffect(() => {
-    axios
-      .get(pokemonURL)
-      .then(({ data }) => setPokemon(data))
-      .catch((err) => console.log(err));
-  }, []);
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get<PokemonResponse>(pokemonURL);
+        setPokemon(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, [pokemonURL]);
 
   return (
     <article
-      onClick={onClick}
+      onClick={() => pokemon && onClick(pokemon)}
       className="text-center bg-white rounded-[30px] relative font-semibold capitalize pb-4 shadow-slate-400/10 border-2 border-transparent hover:border-slate-200 cursor-pointer group grid gap-2"
     >
       <header className="h-10">

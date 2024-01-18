@@ -8,6 +8,9 @@ export default {
     extend: {
       fontFamily: {
         outfit: ["Outfit", "sans-serif"]
+      },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
       }
     },
   },

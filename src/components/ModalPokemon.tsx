@@ -1,17 +1,22 @@
 import { IconX } from "@tabler/icons-react";
 import { colorByType } from "../contants/colors";
-
+import { PokemonDetail } from "./PokemonDetail";
 interface childrenProps {
   showModal: boolean;
   onCloseModal: React.MouseEventHandler<HTMLElement>;
+  pokemon: unknown;
 }
 
-export const ModalPokemon = ({ showModal, onCloseModal }: childrenProps) => {
+export const ModalPokemon = ({
+  showModal,
+  onCloseModal,
+  pokemon,
+}: childrenProps) => {
   return (
     <section
-      className={` fixed lg:hidden top-0 left-0 right-0 h-screen transition-all bg-green-500 duration-500 ${
+      className={` fixed lg:hidden top-0 left-0 right-0 h-screen transition-all  duration-500 ${
         showModal ? "visible opacity-100" : "invisible opacity-0"
-      } ${colorByType[colorByType?.types]}`}
+      } ${colorByType[pokemon?.types[0]]}`}
     >
       <button
         onClick={onCloseModal}
@@ -19,12 +24,13 @@ export const ModalPokemon = ({ showModal, onCloseModal }: childrenProps) => {
       >
         <IconX size={34} stroke={4} />
       </button>
+
       <article
-        className={`bg-white h-[85%] absolute w-full rounded-tl-3xl rounded-tr-3xl text-center transition-all duration-500 ${
+        className={`bg-white h-[85%] absolute w-full rounded-tl-3xl rounded-tr-3xl text-center transition-all duration-500  ${
           showModal ? "bottom-0" : "-bottom-full"
         }`}
       >
-        pokemon
+        <PokemonDetail pokemon={pokemon}/>
       </article>
     </section>
   );
